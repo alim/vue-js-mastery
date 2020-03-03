@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="socks.css">
+  </head>
+  <body>
+    <div class="nav-bar"></div>
+
+    <div id="app">
+
+      <div class="product">
+
+        <div class="product-image">
+          <img :src="image" />
+        </div>
+
+        <div class="product-info">
+          <h1>{{ product }}</h1>
+          <p v-if="inStock">In Stock
+            <span v-if="onSale"><em>and</em> On Sale!</span>
+          </p>
+          <p v-else>Out of Stock</p>
+
+          <p>Product Details:</p>
+          <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+          </ul>
+
+          <p>Color Options:</p>
+          <ul>
+            <li v-for="variant in variants">{{ variant.variantColor }}</li>
+          </ul>
+
+          <p>Size Options:</p>
+          <ul>
+            <li v-for="size in sizes">{{ size }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="main.js"></script>
