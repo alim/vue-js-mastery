@@ -1,5 +1,32 @@
+// Product details for components
+Vue.component('product-details', {
+  props: {
+    details: {
+      type: Array,
+      required: true
+    }
+  },
+
+  template: `
+    <div>
+      <p>Product Details:</p>
+      <ul>
+        <li v-for="detail in details">{{ detail }}</li>
+      </ul>
+    </div>
+  `
+})
+
+
 // Setup a component for the product
 Vue.component('product', {
+  props: {
+    premium: {
+      type: Boolean,
+      required: true,
+    }
+  },
+
   template: `
     <div class="product">
       <div class="product-image">
@@ -18,10 +45,10 @@ Vue.component('product', {
 
         <p>{{ isOnSale }}</p>
 
-        <p>Product Details:</p>
-        <ul>
-          <li v-for="detail in details">{{ detail }}</li>
-        </ul>
+        <p>User is premium: {{ premium }}</p>
+        <p>Shipping cost: {{ shipping }}</p>
+
+        <product-details :details="details"></product-details>
 
         <p>Color Options:</p>
         <div
@@ -120,14 +147,22 @@ Vue.component('product', {
       } else {
         return this.brand + ' ' + this.product + ' are at our regular low price.'
       }
+    },
+
+    shipping() {
+      if (this.premium) {
+        return "Free"
+      } else {
+        return 2.99
+      }
     }
   }
 })
 
-
-// Add a link to your data object, and use v-bind to sync it up with an
-// anchor tag in your HTML. Hint: you’ll be binding to the href attribute.
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    premium_status: true
+  }
 })
 
