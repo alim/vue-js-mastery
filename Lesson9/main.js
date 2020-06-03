@@ -24,6 +24,10 @@ Vue.component('product', {
     premium: {
       type: Boolean,
       required: true,
+    },
+    cart: {
+      type: Array,
+      required: true,
     }
   },
 
@@ -117,8 +121,8 @@ Vue.component('product', {
     },
 
     removeFromCart() {
-      if (this.cart > 0) {
-        this.cart -= 1
+      if (this.cart.length > 0) {
+        this.$emit('remove-from-cart')
       }
     }
   },
@@ -161,8 +165,12 @@ var app = new Vue({
     cart: []
   },
   methods: {
-    updateCart(id) {
+    addItemToCart(id) {
       this.cart.push(id)
+    },
+
+    removeItemFromCart() {
+      this.cart.pop()
     }
   }
 })
